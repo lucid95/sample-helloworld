@@ -1,5 +1,7 @@
 # Embeded SMQD Application Sample
 
+[![Build Status](https://travis-ci.org/smqd/sample-helloworld.svg?branch=develop)](https://travis-ci.org/smqd/sample-helloworld)
+
 This sample shows how simple and easy to build your own application using SMQD
 
 1. check out this project
@@ -8,5 +10,5 @@ This sample shows how simple and easy to build your own application using SMQD
 
 - [build.sbt](build.sbt)
 - [configuration](src/main/resources/hello-world.conf)
-- [Main class](src/main/scala/sample/helloworld/Main.scala)
+- [source code](src/main/scala/sample/helloworld/Main.scala)
 
