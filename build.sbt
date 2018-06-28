@@ -6,6 +6,6 @@ scalaVersion := "2.12.6"
 
 resolvers += Resolver.bintrayRepo("smqd", "smqd")
 
-libraryDependencies += "t2x.smqd" %% "smqd-core" % "0.1.0"
+libraryDependencies += "t2x.smqd" %% "smqd-core" % "0.2.1"
 
-mainClass := Some("sample.helloworld.Main")
+mainClass := Some("sample.helloworld.scala.Main")

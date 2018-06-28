@@ -12,3 +12,8 @@ This sample shows how simple and easy to build your own application using SMQD
 - [configuration](src/main/resources/hello-world.conf)
 - [source code](src/main/scala/sample/helloworld/Main.scala)
 
+
+For Java
+
+`sbt "runMain sample.helloworld.java.Main"`
+

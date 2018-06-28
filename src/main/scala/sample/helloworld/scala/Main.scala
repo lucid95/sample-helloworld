@@ -1,4 +1,4 @@
-package sample.helloworld
+package sample.helloworld.scala
 
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server._
