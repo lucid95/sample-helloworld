@@ -33,22 +33,30 @@ class Controller(name: String, smqd: Smqd, config: Config) extends com.thing2x.s
   implicit val timeout: Timeout = 3.second
 
   //
-  // try "http://localhost:8080/echo/${any_message}" with browser
+  // try "http://localhost:8080/echo/scala/${any_message}" with browser
+  // try "http://localhost:8080/echo/java/${any_message}" with browser
   //
   // This sample shows how rest-api can interact with a service via smqd pub/sub/request api
   //
   def echo: Route = {
     ignoreTrailingSlash {
-      path("echo" / Remaining.?) { tails =>
-        get {
-          val jsval = for {
-            replyMsg <- smqd.request(s"greeting", classOf[String], tails.getOrElse("World"))
-            replyJson = restSuccess(0, JsObject("name" -> JsString(name), "echo" -> JsString(replyMsg.toString)))
-          } yield replyJson
-
-          complete(StatusCodes.OK, jsval)
-        }
+      path("echo" / "scala" / Remaining.?) { remains =>
+        hello("scala", remains)
+      } ~
+      path("echo" / "java" / Remaining.?) { remains =>
+        hello("java", remains)
       }
+    }
+  }
+
+  private def hello(lang: String, remains: Option[String]): Route = {
+    get {
+      val jsval = for {
+        replyMsg <- smqd.request(s"greeting/$lang", classOf[String], remains.getOrElse("World"))
+        replyJson = restSuccess(0, JsObject("name" -> JsString(name), "echo" -> JsString(replyMsg.toString)))
+      } yield replyJson
+
+      complete(StatusCodes.OK, jsval)
     }
   }
 }

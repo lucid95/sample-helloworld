@@ -21,7 +21,7 @@ public class HelloWorldService extends Service implements MessageReceivable {
     this.smqd = smqd;
     this.greeting = config.getString("greeting");
 
-    this.smqd.subscribe(FilterPath.apply("greeting/#"), this);
+    this.smqd.subscribe(FilterPath.apply("greeting/java/#"), this);
   }
 
   @Override

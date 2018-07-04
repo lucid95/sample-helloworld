@@ -14,7 +14,7 @@ class HelloWorldService(name: String, smqd: Smqd, config: Config) extends Servic
 
   private val greeting = config.getString("greeting")
 
-  smqd.subscribe("greeting/#"){
+  smqd.subscribe("greeting/scala/#"){
     case (topic: TopicPath, ResponsibleMessage(replyTo, pigyback)) =>
       smqd.publish(replyTo, s"$greeting ${pigyback.toString}")
 
