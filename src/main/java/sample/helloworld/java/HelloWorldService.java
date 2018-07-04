@@ -21,12 +21,18 @@ public class HelloWorldService extends Service implements MessageReceivable {
     this.smqd = smqd;
     this.greeting = config.getString("greeting");
 
-    this.smqd.subscribe(FilterPath.apply("sensor/+/temp"), this);
+    this.smqd.subscribe(FilterPath.apply("greeting/#"), this);
   }
 
   @Override
   public void onMessage(TopicPath topicPath, Object message) {
-    String str = new String((byte[]) message, StandardCharsets.UTF_8);
-    System.out.println(">>> " + greeting + str);
+    if (message instanceof ResponsibleMessage) {
+      ResponsibleMessage request = (ResponsibleMessage) message;
+      smqd.publish(request.getReplyTo(), greeting + request.getMessage().toString());
+    }
+    else if (message instanceof byte[]) {
+      String str = new String((byte[]) message, StandardCharsets.UTF_8);
+      System.out.println(">>> " + greeting + str);
+    }
   }
 }
