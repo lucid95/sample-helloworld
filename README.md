@@ -18,8 +18,8 @@ This sample shows how simple and easy to build your own application using SMQD
 - [HelloWorldService.scala](src/main/scala/sample/helloworld/scala/HelloWorldService.scala)
 
 #### Java
-- [Main.java](src/main/scala/sample/helloworld/java/Main.java)
-- [HelloWorldService.java](src/main/scala/sample/helloworld/java/HelloWorldService.java)
+- [Main.java](src/main/java/sample/helloworld/java/Main.java)
+- [HelloWorldService.java](src/main/java/sample/helloworld/java/HelloWorldService.java)
 
 
 ### Run samples
