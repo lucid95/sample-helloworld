@@ -2,6 +2,7 @@ package sample.helloworld.java;
 
 import com.thing2x.smqd.*;
 import com.typesafe.config.Config;
+import scala.Option;
 
 import java.nio.charset.StandardCharsets;
 
@@ -16,10 +17,10 @@ public class HelloWorldService extends Service implements MessageReceivable {
 
   private String greeting = "Hello";
 
-  public HelloWorldService(String name, Smqd smqd, Config config) {
+  public HelloWorldService(String name, Smqd smqd, Option<Config> config) {
     super(name, smqd, config);
     this.smqd = smqd;
-    this.greeting = config.getString("greeting");
+    this.greeting = config.get().getString("greeting");
 
     this.smqd.subscribe(FilterPath.apply("greeting/java/#"), this);
   }

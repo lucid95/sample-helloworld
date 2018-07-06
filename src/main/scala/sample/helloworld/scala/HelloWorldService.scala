@@ -10,9 +10,9 @@ import com.typesafe.config.Config
   *
   * Service implementation example for smqd embeded mode in Scala
   */
-class HelloWorldService(name: String, smqd: Smqd, config: Config) extends Service(name, smqd, config) {
+class HelloWorldService(name: String, smqd: Smqd, config: Option[Config]) extends Service(name, smqd, config) {
 
-  private val greeting = config.getString("greeting")
+  private val greeting = config.get.getString("greeting")
 
   smqd.subscribe("greeting/scala/#"){
     case (topic: TopicPath, ResponsibleMessage(replyTo, pigyback)) =>
