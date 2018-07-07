@@ -6,6 +6,6 @@ scalaVersion := "2.12.6"
 
 resolvers += Resolver.sonatypeRepo("public")
 
-libraryDependencies += "com.thing2x" %% "smqd-core" % "0.3.4"
+libraryDependencies += "com.thing2x" %% "smqd-core" % "0.4.0-SNAPSHOT"
 
 mainClass := Some("sample.helloworld.scala.Main")

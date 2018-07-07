@@ -2,7 +2,9 @@ package sample.helloworld.scala
 
 import java.nio.charset.StandardCharsets
 
-import com.thing2x.smqd.{ResponsibleMessage, Service, Smqd, TopicPath}
+import akka.actor.ActorRef
+import com.thing2x.smqd.plugin.Service
+import com.thing2x.smqd.{ResponsibleMessage, Smqd, TopicPath}
 import com.typesafe.config.Config
 
 /**
@@ -10,16 +12,24 @@ import com.typesafe.config.Config
   *
   * Service implementation example for smqd embeded mode in Scala
   */
-class HelloWorldService(name: String, smqd: Smqd, config: Option[Config]) extends Service(name, smqd, config) {
+class HelloWorldService(name: String, smqd: Smqd, config: Config) extends Service(name, smqd, config) {
 
-  private val greeting = config.get.getString("greeting")
+  private var _subscriber: ActorRef = _
 
-  smqd.subscribe("greeting/scala/#"){
-    case (topic: TopicPath, ResponsibleMessage(replyTo, pigyback)) =>
-      smqd.publish(replyTo, s"$greeting ${pigyback.toString}")
+  override def start(): Unit = {
+    val greeting = config.getString("greeting")
 
-    case (topic: TopicPath, msg: Array[Byte]) =>
-      val str = new String(msg, StandardCharsets.UTF_8)
-      println(s">>> $greeting $str")
+    _subscriber = smqd.subscribe("greeting/scala/#"){
+      case (topic: TopicPath, ResponsibleMessage(replyTo, pigyback)) =>
+        smqd.publish(replyTo, s"$greeting ${pigyback.toString}")
+
+      case (topic: TopicPath, msg: Array[Byte]) =>
+        val str = new String(msg, StandardCharsets.UTF_8)
+        println(s">>> $greeting $str")
+    }
+  }
+
+  override def stop(): Unit = {
+    smqd.unsubscribe("greeting/scala/#", _subscriber)
   }
 }
