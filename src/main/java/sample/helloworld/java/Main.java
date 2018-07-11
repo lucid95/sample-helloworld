@@ -21,10 +21,6 @@ import com.thing2x.smqd.Smqd;
  * 2018. 6. 28. - Created by Kwon, Yeong Eon
  */
 public class Main extends SmqMain {
-  @Override
-  public String logo() {
-    return "Hello World in Java";
-  }
 
   @Override
   public String versionString() {

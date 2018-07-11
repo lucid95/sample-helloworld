@@ -21,14 +21,6 @@ package sample.helloworld.scala
   */
 object Main extends App with com.thing2x.smqd.SmqMainBase {
 
-  override val logo: String =
-    """
-      | _   _      _ _        __        __         _     _
-      || | | | ___| | | ___   \ \      / /__  _ __| | __| |
-      || |_| |/ _ \ | |/ _ \   \ \ /\ / / _ \| '__| |/ _` |
-      ||  _  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |
-      ||_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_| """.stripMargin
-
   override val versionString: String = "1.2.3"
 
   override val configBasename: String = "hello-world"
